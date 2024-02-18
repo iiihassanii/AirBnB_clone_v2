@@ -6,6 +6,8 @@ import json
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
+
+    # ! __objName__.__name__.objID
     __objects = {}
 
     def all(self, cls=None):
@@ -28,8 +30,8 @@ class FileStorage:
         """
         if obj is not None:
             key = "{}.{}".format(type(obj).__name__, obj.id)
-            if key in self.__objects:
-                del self.__objects[key]
+            if key in FileStorage.__objects:
+                del FileStorage.__objects[key]
                 self.save()
 
     def new(self, obj):
