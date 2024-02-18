@@ -151,9 +151,9 @@ class HBNBCommand(cmd.Cmd):
                         value = int(value)
                     except ValueError:
                         continue
-                setattr(new_instance, key, value)
 
-        # * add parameters to the instance class
+                # * add parameters to the instance class
+                setattr(new_instance, key, value)
 
         storage.save()
         print(new_instance.id)
