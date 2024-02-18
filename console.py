@@ -135,17 +135,17 @@ class HBNBCommand(cmd.Cmd):
         for param in arg_list[1:]:
             if '=' in param:
                 key, value = param.split('=')
-                #! Handling string value
+                # ! Handling string value
                 if value.startswith('"') and value.endswith('"'):
                     value = value[1:-1].replace('_', ' ')
                     value = value.replace('\\"', '"')  # unescaping quotes
-                #! Handling float value
+                # ! Handling float value
                 elif '.' in value:
                     try:
                         value = float(value)
                     except ValueError:
                         continue
-                #! Handling integer value
+                # ! Handling integer value
                 else:
                     try:
                         value = int(value)
