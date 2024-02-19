@@ -4,6 +4,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 import os
+from models.state import State
+from models.city import City
+from models.user import User
+from models.place import Place
+from models.review import Review
+from models.amenity import Amenity
 
 
 class DBStorage:
@@ -28,7 +34,7 @@ class DBStorage:
     def all(self, cls=None):
         """ Query all objects from the database """
 
-        from models import classes
+        classes = [State, City, User, Place, Review, Amenity]
 
         objects = {}
         if cls:
