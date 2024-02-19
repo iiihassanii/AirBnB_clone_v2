@@ -7,7 +7,8 @@ class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
 
-    # ! __objName__.__name__.objID
+    # ! key = __name__.objID
+    # ! Ex: "State.a245bbf7-d300-4f2f-a08a-810bbdb7c2a5"
     __objects = {}
 
     def all(self, cls=None):
