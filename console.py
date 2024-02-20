@@ -127,7 +127,6 @@ class HBNBCommand(cmd.Cmd):
         params = {}
         for param in arg_list[1:]:
             key_value = param.split('=')
-            print(key_value)
             key_value[1] = eval(key_value[1])
             if type(key_value[1]) is str:
                 key_value[1] = key_value[1].replace(
