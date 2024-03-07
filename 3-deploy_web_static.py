@@ -22,12 +22,11 @@ def do_pack():
     local("mkdir -p versions")
 
     # Get the current time
-    now = datetime.now()
+    now = datetime.now().strftime("%Y%m%d%H%M%S")
 
     # Create the archive name
-
-    archive_name = "web_static_{}{}{}{}{}{}.tgz".format(
-        now.year, now.month, now.day, now.hour, now.minute, now.second
+    archive_name = "web_static_{}.tgz".format(
+        now
     )
 
     try:
