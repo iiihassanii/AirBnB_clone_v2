@@ -12,10 +12,10 @@ def do_pack():
     # Create versions directory if it doesn't exist
     local("mkdir -p versions")
 
-    # Get the current timestamp
+    # Get the current time
     now = datetime.now()
 
-    # Format the archive name using a more compatible format
+    # Create the archive name
     archive_name = "web_static_{}{}{}{}{}{}.tgz".format(
         now.year, now.month, now.day, now.hour, now.minute, now.second
     )
@@ -27,5 +27,4 @@ def do_pack():
         # Return the path to the archive
         return "versions/{}".format(archive_name)
     except Exception as e:
-        print("Error:", e)
         return None
