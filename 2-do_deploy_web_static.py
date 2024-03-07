@@ -6,7 +6,6 @@ from fabric.api import put, run
 from fabric.api import env
 from datetime import datetime
 from os import path
-
 env.hosts = ['54.90.18.3', '100.26.232.118']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
@@ -14,9 +13,10 @@ env.key_filename = '~/.ssh/id_rsa'
 
 def do_deploy(archive_path):
     """Distribute an archive to your web servers"""
+
     try:
         # Upload the archive
-        if path.exists(archive_path) is False:
+        if not path.exists(archive_path):
             return False
         put(archive_path, '/tmp/')
 
@@ -38,6 +38,9 @@ def do_deploy(archive_path):
         run("sudo mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/".format(foldername, foldername))
 
+        run("sudo rm -rf /data/web_static/releases/{}\
+            /web_static".format(foldername))
+
         # Remove old symbolic link
         run("sudo rm -rf /data/web_static/current")
 
@@ -46,5 +49,5 @@ def do_deploy(archive_path):
             /data/web_static/current".format(foldername))
 
         return True
-    except:
+    except Exception as e:
         return False
