@@ -14,10 +14,9 @@ env.key_filename = '~/.ssh/id_rsa'
 
 def do_deploy(archive_path):
     """Distribute an archive to your web servers"""
-
     try:
         # Upload the archive
-        if not path.exists(archive_path):
+        if path.exists(archive_path) is False:
             return False
         put(archive_path, '/tmp/')
 
@@ -39,7 +38,7 @@ def do_deploy(archive_path):
         run("sudo mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/".format(foldername, foldername))
 
-        run("rm -rf /data/web_static/releases/{}\
+        run("sudo rm -rf /data/web_static/releases/{}\
             /web_static".format(foldername))
 
         # Remove old symbolic link
@@ -50,5 +49,5 @@ def do_deploy(archive_path):
             /data/web_static/current".format(foldername))
 
         return True
-    except Exception as e:
+    except:
         return False
