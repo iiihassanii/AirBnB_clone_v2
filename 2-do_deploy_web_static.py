@@ -8,6 +8,7 @@ from datetime import datetime
 from os import path
 env.hosts = ['54.90.18.3', '100.26.232.118']
 env.user = 'ubuntu'
+env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_deploy(archive_path):
@@ -15,7 +16,7 @@ def do_deploy(archive_path):
 
     try:
         # Upload the archive
-        if not path.exists(archive_path):
+        if path.exists(archive_path) is False:
             return False
         put(archive_path, '/tmp/')
 

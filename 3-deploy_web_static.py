@@ -11,6 +11,7 @@ archive_path = None
 
 env.hosts = ['54.90.18.3', '100.26.232.118']
 env.user = 'ubuntu'
+env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_pack():
