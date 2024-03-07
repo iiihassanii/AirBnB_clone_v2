@@ -6,6 +6,7 @@ from fabric.api import put, run, local
 from fabric.api import env
 from datetime import datetime
 from os import path
+archive_path = None
 
 
 env.hosts = ['54.90.18.3', '100.26.232.118']
@@ -81,13 +82,13 @@ def do_deploy(archive_path):
         return False
 
 
-path = do_pack()
-
-
 def deploy():
     """Fabric script (based on the file 2-do_deploy_web_static.py)
     that creates and distributes an archive to your web servers,
     using the function deploy:"""
-    if path is None:
-        return False
-    return do_deploy(path)
+    global archive_path
+    if archive_path is None:
+        archive_path = do_pack()
+        if archive_path is None:
+            return False
+    return do_deploy(archive_path)
