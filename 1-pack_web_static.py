@@ -9,17 +9,23 @@ def do_pack():
     """Fabric script that generates a
     .tgz archive from the contents of the web_static"""
 
-    # Create versions
+    # Create versions directory if it doesn't exist
     local("mkdir -p versions")
 
-    # archive name web_static_<year><month><day><hour><minute><second>.tgz
+    # Get the current timestamp
     now = datetime.now()
+
+    # Format the archive name using a more compatible format
     archive_name = "web_static_{}{}{}{}{}{}.tgz".format(
         now.year, now.month, now.day, now.hour, now.minute, now.second
     )
 
     try:
-        local("tar -czvf versions/{} web_static".format(now))
+        # Archive the web_static directory
+        local("tar -czvf versions/{} web_static".format(archive_name))
+
+        # Return the path to the archive
         return "versions/{}".format(archive_name)
     except Exception as e:
+        print("Error:", e)
         return None
