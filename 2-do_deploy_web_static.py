@@ -39,7 +39,8 @@ def do_deploy(archive_path):
         run("sudo mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/".format(foldername, foldername))
 
-        run("rm -rf /data/web_static/releases/{}/web_static".format(foldername))
+        run("rm -rf /data/web_static/releases/{}\
+            /web_static".format(foldername))
 
         # Remove old symbolic link
         run("sudo rm -rf /data/web_static/current")
@@ -49,5 +50,5 @@ def do_deploy(archive_path):
             /data/web_static/current".format(foldername))
 
         return True
-    except:
+    except Exception as e:
         return False
