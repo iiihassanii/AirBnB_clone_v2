@@ -38,9 +38,6 @@ def do_deploy(archive_path):
         run("sudo mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/".format(foldername, foldername))
 
-        run("sudo rm -rf /data/web_static/releases/{}\
-            /web_static".format(foldername))
-
         # Remove old symbolic link
         run("sudo rm -rf /data/web_static/current")
 
