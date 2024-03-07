@@ -24,6 +24,7 @@ def do_pack():
     now = datetime.now()
 
     # Create the archive name
+
     archive_name = "web_static_{}{}{}{}{}{}.tgz".format(
         now.year, now.month, now.day, now.hour, now.minute, now.second
     )
@@ -80,11 +81,13 @@ def do_deploy(archive_path):
         return False
 
 
+path = do_pack()
+
+
 def deploy():
     """Fabric script (based on the file 2-do_deploy_web_static.py)
     that creates and distributes an archive to your web servers,
     using the function deploy:"""
-    path = do_pack()
     if path is None:
         return False
     return do_deploy(path)
