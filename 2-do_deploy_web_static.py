@@ -8,7 +8,6 @@ from datetime import datetime
 from os import path
 env.hosts = ['54.90.18.3', '100.26.232.118']
 env.user = 'ubuntu'
-env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_deploy(archive_path):
@@ -38,8 +37,8 @@ def do_deploy(archive_path):
         run("sudo mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/".format(foldername, foldername))
 
-        run("sudo rm -rf /data/web_static/releases/{}\
-            /web_static".format(foldername))
+        run("sudo rm -rf /data/web_static/releases/{}/web_static"
+            .format(foldername))
 
         # Remove old symbolic link
         run("sudo rm -rf /data/web_static/current")
