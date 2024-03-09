@@ -2,10 +2,12 @@
 """Fabric script (based on the file 1-pack_web_static.py)
 hat distributes an archive to your web servers,
 using the function do_deploy:"""
+
 from fabric.api import put, run
 from fabric.api import env
-from datetime import datetime
 from os import path
+
+
 env.hosts = ['54.90.18.3', '100.26.232.118']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
@@ -13,7 +15,6 @@ env.key_filename = '~/.ssh/id_rsa'
 
 def do_deploy(archive_path):
     """Distribute an archive to your web servers"""
-
     try:
         # Upload the archive
         if path.exists(archive_path) is False:
@@ -47,6 +48,7 @@ def do_deploy(archive_path):
         # Create new symbolic link
         run("sudo ln -s /data/web_static/releases/{}/ \
             /data/web_static/current".format(foldername))
+        print("New version deployed!")
 
         return True
     except Exception as e:
