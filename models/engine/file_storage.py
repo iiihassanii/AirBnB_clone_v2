@@ -29,11 +29,9 @@ class FileStorage:
         Args:
             obj (BaseModel): object to delete
         """
-        if obj is not None:
+        if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
-            if key in FileStorage.__objects:
-                del FileStorage.__objects[key]
-                self.save()
+            del self.__objects[key]
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
