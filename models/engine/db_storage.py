@@ -12,6 +12,10 @@ from models.review import Review
 from models.amenity import Amenity
 
 
+classes = {"Amenity": Amenity, "City": City,
+           "Place": Place, "Review": Review, "State": State, "User": User}
+
+
 class DBStorage:
     """ Database storage engine """
     __engine = None
@@ -35,7 +39,7 @@ class DBStorage:
 
     def all(self, cls=None):
         """ Query all objects from the database """
-        if cls:
+        """if cls:
             query_result = self.__session.query(cls).all()
         else:
             query_result = []
@@ -45,7 +49,15 @@ class DBStorage:
         for obj in query_result:
             key = "{}.{}".format(obj.__class__.__name__, obj.id)
             objects[key] = obj
-        return objects
+        return objects"""
+        new_dict = {}
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.__session.query(classes[clss]).all()
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    new_dict[key] = obj
+        return (new_dict)
 
     def new(self, obj):
         """ Add the object to the current database session """
